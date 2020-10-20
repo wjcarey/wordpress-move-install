@@ -18,9 +18,10 @@ OLD_INSTALL_PATH=$(realpath -s --canonicalize-existing $OLD_INSTALL_PATH)
 NEW_INSTALL_PATH=$(realpath -s --canonicalize-missing $NEW_INSTALL_PATH)
 
 if [ "$CONFIRM_WORDPRESS_MOVE" != "${CONFIRM_WORDPRESS_MOVE#[Yy]}" ] ;then
+    mkdir ${NEW_INSTALL_PATH}
+    chmod 775 -R ${NEW_INSTALL_PATH} && chown www-data:www-data ${NEW_INSTALL_PATH}
     shopt -s dotglob
     mv ${OLD_INSTALL_PATH}/* ${NEW_INSTALL_PATH}
-    chmod 775 -R ${NEW_INSTALL_PATH} && chown www-data:www-data ${NEW_INSTALL_PATH}
     echo "updating apache2 default virtual host ..."
     sed -i "s#${OLD_INSTALL_PATH}#${NEW_INSTALL_PATH}#" /etc/apache2/sites-available/000-default.conf
     echo "restarting apache2 ..."
