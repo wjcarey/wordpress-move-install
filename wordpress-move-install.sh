@@ -4,7 +4,7 @@ if [ -z "$1" ]
     then
         echo -e "\e[32menter the current install path ... \e[39m"
         read OLD_INSTALL_PATH
-        echo -e "\e[32enter the location for your new install path ... \e[39m"
+        echo -e "\e[32menter the location for your new install path ... \e[39m"
         read NEW_INSTALL_PATH
         echo -e "\e[32mconfirm wordpress move from ${OLD_INSTALL_PATH} to ${NEW_INSTALL_PATH}, Do you want to continue? [Y/n] \e[39m"
         read CONFIRM_WORDPRESS_MOVE
@@ -18,10 +18,9 @@ OLD_INSTALL_PATH=$(realpath -s --canonicalize-existing $OLD_INSTALL_PATH)
 NEW_INSTALL_PATH=$(realpath -s --canonicalize-missing $NEW_INSTALL_PATH)
 
 if [ "$CONFIRM_WORDPRESS_MOVE" != "${CONFIRM_WORDPRESS_MOVE#[Yy]}" ] ;then
-    mkdir ${NEW_INSTALL_PATH}
-    chmod 775 -R ${NEW_INSTALL_PATH} && chown www-data:www-data ${NEW_INSTALL_PATH}
     shopt -s dotglob
     mv ${OLD_INSTALL_PATH}/* ${NEW_INSTALL_PATH}
+    chmod 775 -R ${NEW_INSTALL_PATH} && chown www-data:www-data ${NEW_INSTALL_PATH}
     echo "updating apache2 default virtual host ..."
     sed -i "s#${OLD_INSTALL_PATH}#${NEW_INSTALL_PATH}#" /etc/apache2/sites-available/000-default.conf
     systemctl restart apache2
