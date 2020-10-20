@@ -7,14 +7,14 @@ if [ -z "$1" ]
         echo "enter the location for your new install path ..."
         read NEW_INSTALL_PATH
         echo -e "\e[32mconfirm wordpress move from ${OLD_INSTALL_PATH} to ${NEW_INSTALL_PATH}, Do you want to continue? [Y/n]"
-
+        read CONFIRM_WORDPRESS_MOVE
     else
     OLD_INSTALL_PATH=${1}
     NEW_INSTALL_PATH=${2}
     CONFIRM_WORDPRESS_MOVE="Y"
 fi
 
-OLD_INSTALL_PATH=$(realpath -s --canonicalize-missing $OLD_INSTALL_PATH)
+OLD_INSTALL_PATH=$(realpath -s --canonicalize-existing $OLD_INSTALL_PATH)
 NEW_INSTALL_PATH=$(realpath -s --canonicalize-missing $NEW_INSTALL_PATH)
 
 if [ "$CONFIRM_WORDPRESS_MOVE" != "${CONFIRM_WORDPRESS_MOVE#[Yy]}" ] ;then
