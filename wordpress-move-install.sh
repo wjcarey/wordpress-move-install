@@ -2,11 +2,11 @@
 
 if [ -z "$1" ]
     then
-        echo "enter the current install path ..."
+        echo -e "\e[32menter the current install path ... \e[39m"
         read OLD_INSTALL_PATH
-        echo "enter the location for your new install path ..."
+        echo -e "\e[32enter the location for your new install path ... \e[39m"
         read NEW_INSTALL_PATH
-        echo -e "\e[32mconfirm wordpress move from ${OLD_INSTALL_PATH} to ${NEW_INSTALL_PATH}, Do you want to continue? [Y/n]"
+        echo -e "\e[32mconfirm wordpress move from ${OLD_INSTALL_PATH} to ${NEW_INSTALL_PATH}, Do you want to continue? [Y/n] \e[39m"
         read CONFIRM_WORDPRESS_MOVE
     else
     OLD_INSTALL_PATH=${1}
