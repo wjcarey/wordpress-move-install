@@ -14,8 +14,8 @@ if [ -z "$1" ]
     CONFIRM_WORDPRESS_MOVE="Y"
 fi
 
-OLD_INSTALL_PATH=$(realpath -s --canonicalize-missing $INSTALL_PATH)
-NEW_INSTALL_PATH=$(realpath -s --canonicalize-missing $INSTALL_PATH)
+OLD_INSTALL_PATH=$(realpath -s --canonicalize-missing $OLD_INSTALL_PATH)
+NEW_INSTALL_PATH=$(realpath -s --canonicalize-missing $NEW_INSTALL_PATH)
 
 if [ "$CONFIRM_WORDPRESS_MOVE" != "${CONFIRM_WORDPRESS_MOVE#[Yy]}" ] ;then
     mkdir ${NEW_INSTALL_PATH}
