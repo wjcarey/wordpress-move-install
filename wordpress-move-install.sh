@@ -24,6 +24,7 @@ if [ "$CONFIRM_WORDPRESS_MOVE" != "${CONFIRM_WORDPRESS_MOVE#[Yy]}" ] ;then
     mv ${OLD_INSTALL_PATH}/* ${NEW_INSTALL_PATH}
     echo "updating apache2 default virtual host ..."
     sed -i "s#${OLD_INSTALL_PATH}#${NEW_INSTALL_PATH}#" /etc/apache2/sites-available/000-default.conf
+    systemctl restart apache2
 else
     echo "notice: the wordpress installer was skipped by user..."
 fi
