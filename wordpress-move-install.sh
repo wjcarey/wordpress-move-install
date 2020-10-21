@@ -22,7 +22,7 @@ if [ "$CONFIRM_WORDPRESS_MOVE" != "${CONFIRM_WORDPRESS_MOVE#[Yy]}" ] ;then
     chmod 775 -R ${NEW_INSTALL_PATH} && chown www-data:www-data ${NEW_INSTALL_PATH}
     shopt -s dotglob
     mv ${OLD_INSTALL_PATH}/* ${NEW_INSTALL_PATH}
-    rm ${OLD_INSTALL_PATH}
+    rm -R ${OLD_INSTALL_PATH}
     echo "updating apache2 default virtual host for directory ${NEW_INSTALL_PATH} ..."
     sed -i "s#${OLD_INSTALL_PATH}#${NEW_INSTALL_PATH}#" /etc/apache2/sites-available/000-default.conf
     echo "restarting apache2 ..."
